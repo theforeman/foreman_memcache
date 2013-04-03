@@ -1,0 +1,10 @@
+= ForemanMemcache
+
+Adds memcache support for foreman (http://theforeman.org).
+
+This Foreman plugin allows to use memcache as a cache storaged and session information.
+this is useful when you want to deploy foreman across multiple servers and / or speed up foreman cache performance.
+
+You would need to install memcache, currently we default to memcache installed on the same system as where foreman is running.
+
+in later patch we would extract the settings into a configuration file.
