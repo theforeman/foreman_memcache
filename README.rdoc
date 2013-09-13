@@ -5,6 +5,25 @@ Adds memcache support for foreman (http://theforeman.org).
 This Foreman plugin allows to use memcache as a cache storaged and session information.
 this is useful when you want to deploy foreman across multiple servers and / or speed up foreman cache performance.
 
-You would need to install memcache, currently we default to memcache installed on the same system as where foreman is running.
+You will need to install a memcached instance to use this plugin.
 
-in later patch we would extract the settings into a configuration file.
+## Configuration
+
+By default, the plugin will enable memcache-based caching pointing to memcached on the local host.
+
+The memcache host(s) and options can be changed by adding settings to `/usr/share/foreman/config/settings.plugins.d/foreman_memcache.yaml`, or Foreman's own `settings.yaml`.
+
+Example config file:
+
+```yaml
+:memcache:
+  :hosts:
+    - cache-1.example.com
+    - cache-2.example.com
+  :options:
+    :namespace: foreman
+    :expires_in: 86400
+    :compress: true
+```
+
+The :options hash contains settings as per the [Dalli configuration reference](https://github.com/mperham/dalli#configuration).  The namespace will default to 'foreman' unless specified.

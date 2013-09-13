@@ -2,10 +2,13 @@ module ForemanMemcache
   class Engine < ::Rails::Engine
     isolate_namespace ForemanMemcache
     initializer "setup_memcache", :before => :initialize_cache do |app|
-
-      #  config.cache_store = :dalli_store, 'cache-1.example.com', 'cache-2.example.com',
-      #      { :namespace => NAME_OF_RAILS_APP, :expires_in => 1.day, :compress => true  }
-      app.config.cache_store = :dalli_store
+      args = [:dalli_store]
+      if (s = SETTINGS[:memcache])
+        Array.wrap(s[:hosts]).each { |h| args << h }
+        args << { :namespace => 'foreman' }.merge(s[:options] || {})
+      end
+      Rails.logger.info "memcached cache backend enabled: #{args}"
+      app.config.cache_store = args
     end
 
     initializer "setup_memcache", :after => :load_config_initializers do |app|
