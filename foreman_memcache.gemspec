@@ -12,8 +12,9 @@ Gem::Specification.new do |s|
   s.homepage    = "http://theforeman.org"
   s.summary     = "Adds memcache integeration to foreman"
   s.description = "adds memcache support to foreman"
+  s.licenses    = ["GPL-3"]
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc", "foreman_memcache.yaml.example"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.md", "foreman_memcache.yaml.example"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "dalli"
