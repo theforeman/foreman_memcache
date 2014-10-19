@@ -14,6 +14,9 @@ module ForemanMemcache
     initializer "setup_memcache", :after => :load_config_initializers do |app|
       # reuse cache store for sessions
       app.config.session_store ActionDispatch::Session::CacheStore
+      # register plugin in Foreman
+      Foreman::Plugin.register :foreman_memcache do
+      end
     end
 
   end
