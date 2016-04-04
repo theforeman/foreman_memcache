@@ -1,9 +1,6 @@
-$:.push File.expand_path("../lib", __FILE__)
+require File.expand_path('../lib/foreman_memcache/version', __FILE__)
+require 'date'
 
-# Maintain your gem's version:
-require "foreman_memcache/version"
-
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "foreman_memcache"
   s.version     = ForemanMemcache::VERSION
@@ -18,4 +15,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "dalli"
+  s.add_dependency 'deface'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rdoc'
 end
