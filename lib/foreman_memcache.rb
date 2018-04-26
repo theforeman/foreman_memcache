@@ -11,11 +11,13 @@ module ForemanMemcache
       app.config.cache_store = args
     end
 
-    initializer 'setup_memcache', :after => :load_config_initializers do |app|
-      # reuse cache store for sessions
-      app.config.session_store ActionDispatch::Session::CacheStore
-      # register plugin in Foreman
+    initializer 'setup_memcache', :before => :build_middleware_stack do |app|
+      app.config.middleware.swap ActionDispatch::Session::ActiveRecordStore, ActionDispatch::Session::CacheStore
+    end
+
+    initializer 'foreman_memcache.register_plugin', :before => :finisher_hook do |app|
       Foreman::Plugin.register :foreman_memcache do
+        requires_foreman '>= 1.16'
       end
     end
   end
