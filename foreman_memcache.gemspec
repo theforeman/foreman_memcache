@@ -6,9 +6,9 @@ Gem::Specification.new do |s|
   s.version     = ForemanMemcache::VERSION
   s.authors     = ['Ohad Levy']
   s.email       = ['ohadlevy@gmail.com']
-  s.homepage    = 'http://theforeman.org'
-  s.summary     = 'Adds memcache integeration to foreman'
-  s.description = 'adds memcache support to foreman'
+  s.homepage    = 'https://github.com/theforeman/foreman_memcache'
+  s.summary     = 'Adds memcache integration to foreman'
+  s.description = 'Adds memcache support to foreman'
   s.licenses    = ['GPL-3']
 
   s.files = Dir['{app,config,db,lib}/**/*'] + \
