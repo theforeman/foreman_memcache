@@ -6,13 +6,18 @@ module ForemanMemcache
       if (s = SETTINGS[:memcache])
         Array.wrap(s[:hosts]).each { |h| args << h }
         args << { :namespace => 'foreman' }.merge(s[:options] || {})
+
+        Rails.logger.info "memcached cache backend enabled: #{args}"
+        app.config.cache_store = args
+      else
+        Rails.logger.info "memcached cache backend disabled: no servers configured in SETTINGS"
       end
-      Rails.logger.info "memcached cache backend enabled: #{args}"
-      app.config.cache_store = args
     end
 
     initializer 'setup_memcache', :before => :build_middleware_stack do |app|
-      app.config.middleware.swap ActionDispatch::Session::ActiveRecordStore, ActionDispatch::Session::CacheStore
+      if SETTINGS[:memcache]
+        app.config.middleware.swap ActionDispatch::Session::ActiveRecordStore, ActionDispatch::Session::CacheStore
+      end
     end
 
     initializer 'foreman_memcache.register_plugin', :before => :finisher_hook do |app|
