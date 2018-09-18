@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/theforeman/foreman_memcache'
   s.summary     = 'Adds memcache integration to foreman'
   s.description = 'Adds memcache support to foreman'
-  s.licenses    = ['GPL-3']
+  s.licenses    = ['GPL-3.0']
 
   s.files = Dir['{app,config,db,lib}/**/*'] + \
             %w(LICENSE Rakefile README.md foreman_memcache.yaml.example)
